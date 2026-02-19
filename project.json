@@ -1,0 +1,43 @@
+{
+  "agency": {
+    "name": "Foxhue Ltd",
+    "primary_email": "andrew@foxhue.com",
+    "cc_email": "ashley@foxhue.com",
+    "github_org": "ajeibbotson-cmyk"
+  },
+  "client": {
+    "name": "Client Name",
+    "short_name": "Client",
+    "tagline": "Tagline Here",
+    "slug": "client-slug",
+    "industry": "industry-type",
+    "location": "City, Region",
+    "phone": "000 000 0000",
+    "email": "hello@client.com",
+    "website": "https://client.com"
+  },
+  "brand": {
+    "colors": {
+      "primary": "#3C3C3B",
+      "accent": "#C6BCB3",
+      "accent_hover": "#B4A89D",
+      "background": "#F9F9F8",
+      "surface": "#ECE5E0"
+    },
+    "fonts": {
+      "heading": "'Cormorant Garamond', serif",
+      "body": "'Noto Sans', sans-serif",
+      "google_fonts_url": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Noto+Sans:wght@300;400;500;600&display=swap"
+    }
+  },
+  "designs": [
+    { "key": "a", "name": "Direction A", "mood": "Mood description for direction A" },
+    { "key": "b", "name": "Direction B", "mood": "Mood description for direction B" },
+    { "key": "c", "name": "Direction C", "mood": "Mood description for direction C" }
+  ],
+  "pages": [
+    { "key": "homepage", "title": "Homepage", "slug": "index" },
+    { "key": "about", "title": "About", "slug": "about" },
+    { "key": "contact", "title": "Contact", "slug": "contact" }
+  ]
+}
