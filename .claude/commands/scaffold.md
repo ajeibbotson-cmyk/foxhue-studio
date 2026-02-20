@@ -30,16 +30,20 @@ Requirements:
   - Each column has a small uppercase label above the value
   - Values use the heading font, labels use small uppercase body font in accent colour
   - On mobile, the three columns stack vertically
-- **4-card grid layout** linking to deliverables:
-  1. **Creative Process** → `docs/creative-process.html` — "See how we developed your design directions"
-  2. **Design Directions** → `designs/index.html` — "Review three distinct visual approaches"
-  3. **Layout Review** → `website/variants/index.html` — "Choose your preferred layout per page"
-  4. **SEO Report** → `docs/seo-competitor-report.html` — "Competitor analysis and opportunities"
-- Cards should have hover effects and be visually prominent
+- Welcome heading uses the **body font** (not heading font) — clean, modern, sans-serif
+- **Numbered card grid** (2 columns, stacks to 1 on mobile) linking to deliverables:
+  1. **Creative Process** → `docs/creative-process.html` — "How we got here — the research, inspiration, and thinking behind your design directions"
+  2. **Design Directions** → `designs/index.html` — "Three distinct visual approaches for {client.short_name}"
+  3. **Layout Review** → `website/variants/index.html` — "Compare all three layouts across every page, pick your preferences, and leave notes"
+  4. **SEO Report** → `docs/seo-competitor-report.html` — "In-depth competitor analysis, keyword opportunities, and SEO recommendations"
+- Each card has: number (01, 02...), heading (heading font), description, and uppercase arrow link text
+- Cards have rounded corners, subtle shadow, hover lift effect with increased shadow
+- Wrap cards in a `<nav>` with `aria-label="Project deliverables"`
 - **Conditional cards** based on `deliverables` flags:
   - If `deliverables.social_audit` is `true`, add a 5th card: **Social Audit** → `docs/social-media-audit.html`
-  - If `deliverables.landing_page` is `true`, add a card: **Landing Page** → `landing/index.html`
+  - If `deliverables.landing_page` is `true`, add a card: **Landing Page** → `landing/index.html` — "Campaign landing page for Meta advertising — standalone offer with pricing and booking"
 - Footer: `Prepared by {agency.name}`
+- Add `<meta name="robots" content="noindex, nofollow">` — hub is not for public indexing
 - Styled with brand colors from config
 - Load Google Fonts from `brand.fonts.google_fonts_url`
 - Professional, client-facing design — not just an internal tool
