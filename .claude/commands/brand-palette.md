@@ -12,6 +12,7 @@ Extract:
 - `brand.fonts` — for "in use" preview cards
 - `designs[]` — direction names and moods, to tailor each palette
 - `agency.name` — report attribution
+- `agency.primary_email`, `agency.cc_email` — feedback form submission targets
 
 ### 2. Research client and competitors via Perplexity
 
@@ -149,13 +150,27 @@ A self-contained HTML report. Requirements:
    - Show colour swatches (small inline squares) alongside hex values where available
    - Note patterns and gaps — where can the client differentiate?
 
-6. **Next Steps**
-   - Instructions for the designer:
-     1. Review the three palettes in context with the design directions
-     2. Pick the palette that best fits the chosen direction (or mix elements)
-     3. Copy the chosen hex values into `project.json` -> `brand.colors`
-     4. Run `/scaffold` to generate all project infrastructure with the chosen colours
-   - Note that palettes can be refined — these are starting points, not final decisions
+6. **Your Feedback** (client-facing feedback form)
+   - Section title: "Your Feedback"
+   - Intro text: "Which palette direction feels right for {client.name}? Pick your preference below and add any notes — we'll refine from there."
+   - **Three radio-style palette cards** (one per direction from `designs[]`):
+     - Each card shows: direction label (A/B/C), direction name, and a mini row of 5 colour swatches (30px squares using that palette's hex values)
+     - Cards are selectable via hidden radio input — selected card gets a dark border highlight
+     - Grid layout: 3 columns on desktop, 1 column on mobile
+   - **Notes textarea**: label "Any colour notes?", placeholder "e.g. 'Love the copper but want a lighter background'"
+   - **Client name** field (required) + **email** field (optional)
+   - **Submit button** + **Copy to Clipboard** fallback button
+   - **Form configuration**:
+     - `action="https://formsubmit.co/{agency.primary_email}"` (from `project.json`)
+     - Hidden field `_cc` = `{agency.cc_email}` (from `project.json`)
+     - Hidden field `_subject` = `"{client.name} — Palette Preference"`
+     - Hidden field `_captcha` = `"false"`
+   - **AJAX submission**: `fetch` with `Accept: application/json` header, inline success message (no redirect)
+   - **localStorage auto-save**: persist palette selection + notes + name/email across page reloads (key: `{client.slug}_palette_feedback`)
+   - **Copy to clipboard**: compile plaintext summary of selection and notes, with `navigator.clipboard` and `execCommand('copy')` fallback
+   - **Inline `<script>`** at end of `<body>` handles all form logic (no external JS)
+   - **Print CSS**: hide the form section in print media query
+   - Note: these are starting points — palettes can be refined based on client feedback
 
 **Navigation**: Include a subtle "<- Project Hub" link at the top of the page, linking to `../index.html`. Style it as a small, muted link above the header — not visually dominant but always accessible. Grey text, darker on hover.
 
