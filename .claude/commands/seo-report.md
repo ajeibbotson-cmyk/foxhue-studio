@@ -108,6 +108,8 @@ A self-contained, branded HTML report. Requirements:
    - Quick wins vs long-term strategies
    - Suggested timeline
 
+**Navigation**: Include a subtle "← Project Hub" link at the top of the page, linking to `../index.html`. Style it as a small, muted link above the header — not visually dominant but always accessible. Use the accent colour on hover.
+
 **Footer**: `Prepared by {agency.name} | Confidential`
 
 ## Important

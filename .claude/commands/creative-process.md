@@ -11,9 +11,10 @@ Extract:
 - `client.name`, `client.short_name`, `client.tagline` — for page headings
 - `client.slug` — for CSS variable prefixes and file naming
 - `client.industry` — for contextual copy
-- `brand.colors.*` — for page styling
+- `brand.mood` — for colour exploration section (mood keywords as chips)
+- `brand.colors.*` — for page styling and colour swatch display
 - `brand.fonts.*` — for typography
-- `designs[]` — for design direction summary cards
+- `designs[]` — for design direction summary cards (including `palette` if available)
 - `agency.name` — for footer attribution
 
 ### 2. Read inspiration/references.md
@@ -69,21 +70,42 @@ A self-contained, branded HTML page. Requirements:
    - Each principle gets a short heading and 1-2 sentence explanation
    - These should feel like they naturally bridge from research to design directions
 
-6. **Three Directions**
+6. **Colour Exploration** (conditional)
+
+   Check if `docs/brand-palette.html` exists in the project.
+
+   **If it exists** (palette was generated via `/brand-palette`):
+   - Section heading: "Finding Your Colours"
+   - Brief narrative: explain that colours were researched, not picked arbitrarily
+   - Display the `brand.mood` keywords as styled tags/chips
+   - Summarise the research approach: industry colour norms, colour psychology for the mood keywords, competitor colour audit
+   - For each design direction, show a mini swatch row (5 colours from the palette) with the direction name — giving the client a visual taste before the full directions
+   - Link to the full palette report: `brand-palette.html` ("View the complete palette exploration")
+   - Tone: "We explored colour palettes grounded in research — industry conventions, colour psychology, and competitive differentiation."
+
+   **If it doesn't exist** (client had a style guide):
+   - Section heading: "Brand Colours"
+   - Brief note: "Your brand colours were drawn from your existing brand guidelines, ensuring consistency across all touchpoints."
+   - Show the 5 brand colours from `brand.colors` as a single swatch row
+   - Keep this section short — the client already knows their own colours
+
+7. **Three Directions**
    - One summary card per entry in `designs[]`
    - Each card shows: direction name, mood description
    - Link each card to `../designs/design-{key}/index.html`
    - Brief framing text: "Based on our research, we developed three distinct approaches for your consideration."
    - Cards should be visually prominent — this is the payoff of the page
 
-7. **Footer**
+8. **Footer**
    - `Prepared by {agency.name}`
    - Professional, minimal
    - Matching brand styling
 
+**Navigation**: Include a subtle "← Project Hub" link at the top of the page, linking to `../index.html`. Style it as a small, muted link above the hero — not visually dominant but always accessible. Use the accent colour on hover.
+
 ## Important
 - ALL values come from `project.json` and `references.md` — no hardcoded client data
-- The page should tell a coherent narrative: Brief → Research → Insights → Directions
+- The page should tell a coherent narrative: Brief → Research → Insights → Colours → Directions
 - Write copy that's professional but warm — this is client-facing, not a design spec
 - If `references.md` has few entries, adapt the gallery section gracefully (don't show an empty grid)
 - HTML must be fully self-contained (style block + Google Fonts link)
