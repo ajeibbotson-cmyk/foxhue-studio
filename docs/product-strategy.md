@@ -66,7 +66,7 @@ Every command reads `project.json`. Every output is client-ready HTML — not in
 | **4. Build** | Days 5-10 | Build all pages + layout variants → run `/landing-page` (if applicable) → client submits layout preferences via review hub |
 | **5. Handoff** | Days 10-12 | Apply preferences → final polish → deliver (Webflow import, static, or handoff docs) |
 
-The system handles Phases 1 and 2 almost entirely. Phase 3 (design direction creation) is the main manual bottleneck. Phases 4 and 5 are a mix of manual build and automated tooling.
+The system handles Phases 1 and 2 almost entirely. Phase 3 (design direction creation) doesn't have a formalised command yet — it's currently a Claude prompting session using Perplexity research and the mood descriptions from `project.json`. Building a `/design-directions` command is the key piece that would make Phase 3 as streamlined as the rest. Phases 4 and 5 are a mix of manual build and automated tooling.
 
 ---
 
@@ -194,7 +194,8 @@ The report is the real deal — professional, genuinely useful, not a teaser. Th
 
 - We create a `project.json` from the intake form answers
 - Run `/scaffold` to generate the infrastructure
-- Build 3 design directions (the manual part — 2-3 hours of design work)
+- Run `/design-directions` — Claude generates 3 distinct homepage concepts using Perplexity research on competitor sites and industry trends, guided by the mood descriptions in `project.json` (same approach used for MARR, but formalised as a command)
+- Review and refine the output (the QA step — not the creation step)
 - Deploy to GitHub Pages
 - Send the client a link to their personalised design hub
 
@@ -213,7 +214,7 @@ The client sees real, branded homepage concepts for their business. Not mockups 
 
 ## 10. Qualification Questions
 
-The intake form needs to capture enough to run the audit AND tell us whether the lead is worth the 2-3 hours of design work in Stage 5. Here are the questions with rationale:
+The intake form needs to capture enough to run the audit AND tell us whether the lead is worth investing in design directions (Stage 5). Here are the questions with rationale:
 
 | # | Question | Type | Data captured | Qualification signal |
 |---|----------|------|--------------|---------------------|
@@ -295,8 +296,8 @@ The audit shows problems. We sell the solutions.
 
 1. **Create project.json** from the intake form answers (business name, industry, location, URL → mapped into config fields)
 2. **Run `/scaffold`** to generate the project infrastructure (project hub, design directions hub)
-3. **Research** — quick Perplexity pass on industry aesthetics and competitor sites (can reuse audit research)
-4. **Build 3 design directions** — this is the manual part. 3 distinct homepage concepts for their business.
+3. **Run `/design-directions`** — Perplexity researches competitor sites and industry aesthetics, Claude generates 3 distinct homepage concepts guided by the mood descriptions in `project.json`
+4. **Review and refine** — QA the output, adjust where needed
 5. **Deploy** to GitHub Pages
 6. **Send the link** — personalised design hub at `https://ajeibbotson-cmyk.github.io/{client-slug}/designs/`
 
@@ -310,12 +311,14 @@ A branded design hub with 3 distinct homepage concepts they can click through. N
 |------|------|-----------|
 | Create project.json | 10 min | Could be automated from form data (stretch goal) |
 | Run `/scaffold` | 2 min | Yes |
-| Research pass | 15 min | Partially (Perplexity) |
-| Build 3 design directions | 2-3 hours | No — this is the bottleneck |
+| Run `/design-directions` | 15-20 min | Yes — Perplexity research + Claude generation |
+| Review and refine output | 30-45 min | No — QA and adjustments |
 | Deploy + send link | 5 min | Yes |
-| **Total** | **~3 hours** | **~80% automated except design** |
+| **Total** | **~1 hour** | **~70% automated, remainder is QA** |
 
-### When to invest the 3 hours
+The bottleneck isn't design skill — it's that `/design-directions` doesn't exist as a command yet. Once built, the creation step is automated. The human time is review and refinement, not creation from scratch.
+
+### When to invest the hour
 
 Not every lead gets design directions. The qualification logic:
 
@@ -332,7 +335,7 @@ Not every lead gets design directions. The qualification logic:
 
 | Tier | What they get | Price | Notes |
 |------|--------------|-------|-------|
-| **Free** | Website audit + 3 design directions | £0 | Lead magnet. Cost to us: ~3 hours. |
+| **Free** | Website audit + 3 design directions | £0 | Lead magnet. Cost to us: ~1 hour per lead. |
 | **Website Build** | Full site (up to 10 pages + 3 layout variants per page + landing page) | TBD | Includes all Phase 1-5 deliverables: project hub, SEO report, creative process, design directions, review hub, landing page. |
 | **Website + SEO Retainer** | Full build + monthly SEO reporting, content recommendations, GBP management | TBD (build fee + monthly) | Recurring revenue. Retainer deliverables powered by roadmap commands. |
 
@@ -352,7 +355,7 @@ Pricing isn't locked yet, but the framework:
 
 - **Build pricing** should account for the fact that the free audit and designs already demonstrate our capability. The client has seen the quality before they get a quote. This reduces price sensitivity.
 - **Retainer pricing** should be monthly, with a minimum commitment (3 or 6 months). The tooling makes it efficient for us to deliver — the margin should be strong.
-- **The free tier is an investment**, not a loss leader. 3 hours per qualified lead is sustainable if the conversion rate to paid work is reasonable. At even a 20% conversion rate, that's 15 hours of free work for every paid project — acceptable if project values are £3k+.
+- **The free tier is an investment**, not a loss leader. ~1 hour per qualified lead is sustainable even at modest conversion rates. At 20% conversion, that's 5 hours of free work for every paid project. At 10%, it's 10 hours — still comfortable if project values are £3k+.
 
 ---
 
@@ -362,34 +365,38 @@ Concrete list of new assets and commands needed to make the funnel operational:
 
 | Asset | Description | Effort | Dependencies |
 |-------|------------|--------|-------------|
+| **`/design-directions` command** | Reads `project.json` moods + `inspiration/references.md` + Perplexity research on competitor sites and industry trends. Generates 3 distinct branded homepage concepts as self-contained HTML/CSS. Same approach used for MARR, formalised as a repeatable command. | 2-3 days | `project.json`, Perplexity MCP |
+| **`/free-audit` command** | Lighter variant of `/seo-report` extended with GBP check, schema audit, and page-level ranking assessment. Foxhue-branded output (not client-branded). | 2-3 days | `/seo-report` as base |
 | **Lead magnet landing page** | Single-purpose HTML/CSS page. "Is your website costing you customers?" headline, intake form, trust signals. Can use the `/landing-page` command pattern. | 1 day | None — can build now |
 | **Intake form** | 8-question form (see Section 10). Options: Formsubmit.co (simple, free, matches our existing pattern) or Typeform (nicer UX, paid). Needs to capture data we can feed into `project.json`. | Half day | Landing page |
-| **`/free-audit` command** | Lighter variant of `/seo-report` extended with GBP check, schema audit, and page-level ranking assessment. Foxhue-branded output (not client-branded). | 2-3 days | `/seo-report` as base |
 | **Email templates** | 3 HTML email templates for the follow-up sequence (audit delivery, quick wins, design directions offer). Plain but branded. | 1 day | Audit command |
 | **Proposal template** | Branded pitch document — scope, timeline, deliverables, pricing. Maps to the `/proposal` item in the roadmap. | 1-2 days | None — can build alongside |
 | **Form → project.json automation** | Script to create a `project.json` from intake form submission data. Stretch goal — can do this manually at first. | 1 day | Intake form |
 
 ### Build priority order
 
-1. **`/free-audit` command** — the core product of the funnel. Build and test this first.
-2. **Landing page + intake form** — the front door. Keep it simple.
-3. **Email templates** — needed for delivery. Can be plain text initially.
-4. **Proposal template** — needed to close. Build when the first leads come through.
-5. **Form → project.json automation** — nice to have. Do manually until volume justifies it.
+1. **`/design-directions` command** — the missing piece that makes Phase 3 as automated as the rest. Build this first — it benefits both the funnel and every paying client project.
+2. **`/free-audit` command** — the core product of the funnel.
+3. **Landing page + intake form** — the front door. Keep it simple.
+4. **Email templates** — needed for delivery. Can be plain text initially.
+5. **Proposal template** — needed to close. Build when the first leads come through.
+6. **Form → project.json automation** — nice to have. Do manually until volume justifies it.
 
 ---
 
 ## 15. Risks and Open Questions
 
-### The bottleneck: design direction creation
+### The bottleneck: design direction quality at scale
 
-The 3 free design directions take 2-3 hours of manual design work per lead. This is the constraint on the whole funnel. If we get 10 qualified leads a week, that's 20-30 hours of design work — more than one person can handle alongside paid projects.
+With a `/design-directions` command, generation is automated — but the output still needs review and refinement (~30-45 min per lead). At 10 qualified leads per week, that's 5-8 hours of QA work. Manageable, but worth watching.
+
+The real risk is quality consistency. Claude generates good design directions when guided by strong mood descriptions and research, but output quality varies. Some directions will need significant rework; others will ship as-is.
 
 **Mitigation options:**
-- Gate the designs behind a quick call (5-10 min video chat). This further qualifies and reduces wasted design time. But it also adds friction.
-- Build industry-specific design direction templates (clinic template, restaurant template, etc.) that reduce the manual work per lead to 1-1.5 hours.
+- Build industry-specific design direction templates and reference sets (clinic, restaurant, trades, etc.) that give Claude stronger starting points and reduce QA variance.
 - Only offer designs to "actively looking" + budget-qualified leads (the qualification logic in Section 12).
-- Hire a junior designer to handle design directions from templates once volume justifies it.
+- Refine the `/design-directions` command iteratively — each project improves the prompt and patterns.
+- Gate the designs behind a quick call for borderline leads (5-10 min video chat). Further qualifies without adding friction for hot leads.
 
 ### Gate or send cold?
 
@@ -404,7 +411,7 @@ Do we require a call before sending design directions, or send them unprompted?
 
 If the funnel works and we're getting 10+ qualified leads per week:
 
-- Design direction creation becomes the bottleneck (see above)
+- Design direction QA becomes the main time commitment (see above)
 - We need reliable infrastructure for hosting multiple lead projects on GitHub Pages
 - Email delivery needs to be more robust than manual sending (consider a simple email service)
 - This connects to the team scaling question in the product roadmap — contractors or junior staff
@@ -438,8 +445,9 @@ The product roadmap (see `docs/product-roadmap.md`) already has features planned
 
 | Roadmap feature | Funnel impact |
 |----------------|---------------|
-| `/style-guide` | Auto-generates a visual style guide from config. Speeds up design direction creation. |
-| Industry templates | Pre-filled `project.json` for common verticals. Reduces "blank page" setup for each lead to minutes. Directly reduces the 2-3 hour design bottleneck. |
+| `/design-directions` | **The missing command.** Automates Phase 3 — the one step that doesn't have a command yet. Reads moods + research, generates 3 homepage concepts via Claude + Perplexity. Benefits every project, not just the funnel. |
+| `/style-guide` | Auto-generates a visual style guide from config. Feeds into `/design-directions` for more consistent output. |
+| Industry templates | Pre-filled `project.json` for common verticals. Gives `/design-directions` stronger starting points. Reduces QA time per lead. |
 | `/schema-markup` | Feeds into the free audit's schema section. Also an immediate deliverable for paying clients. |
 
 ### Tier 2 (Client Value-Adds) → Upsell Deliverables
