@@ -1,15 +1,15 @@
-# Foxhue SuperClaude — Product & Commercialisation Strategy
+# Foxhue Studio — Product & Commercialisation Strategy
 
 *Internal strategy document for Andrew & Ashley*
 *23 February 2026*
 
 ---
 
-# Part 1: What foxhue-superclaude Is
+# Part 1: What Foxhue Studio Is
 
 ## 1. The Pitch
 
-Foxhue SuperClaude is a config-driven website delivery system. You clone a template repo, fill in one JSON file with the client's details, and run a set of slash commands — each one generates a specific, branded, client-ready deliverable. SEO reports, design directions, creative process pages, landing pages, layout review hubs — all produced from the same config, all consistent, all shareable via a single GitHub Pages URL. It turns a 2-week web project into a repeatable process that any team member can follow, and it makes a two-person agency look like it has a production department.
+Foxhue Studio is a config-driven website delivery system. You clone a template repo, fill in one JSON file with the client's details, and run a set of slash commands — each one generates a specific, branded, client-ready deliverable. SEO reports, design directions, creative process pages, landing pages, layout review hubs — all produced from the same config, all consistent, all shareable via a single GitHub Pages URL. It turns a 2-week web project into a repeatable process that any team member can follow, and it makes a two-person agency look like it has a production department.
 
 ---
 
@@ -21,7 +21,7 @@ Everything flows from one file: `project.json`. It holds the client's name, indu
 
 The delivery model:
 
-1. **Clone** the `foxhue-superclaude` template repo on GitHub
+1. **Clone** the `foxhue-studio` template repo on GitHub
 2. **Configure** `project.json` with the client's details
 3. **Run commands** — each one reads the config and produces branded output files
 4. **Deploy** via GitHub Pages — the client gets a single URL to access everything
@@ -190,7 +190,7 @@ The report is the real deal — professional, genuinely useful, not a teaser. Th
 
 ### Stage 5: Hook
 
-**3 free design directions** generated via foxhue-superclaude.
+**3 free design directions** generated via Foxhue Studio.
 
 - We create a `project.json` from the intake form answers
 - Run `/scaffold` to generate the infrastructure
@@ -497,12 +497,12 @@ Client sees live homepage concepts on GitHub Pages
         ↓
 Proposal: website build + optional SEO retainer
         ↓
-Paying client → full 5-phase SuperClaude workflow
+Paying client → full 5-phase Studio workflow
         ↓
 Retainer: monthly SEO, GBP management, content strategy
 ```
 
-Every stage is powered by foxhue-superclaude commands. The same system that delivers the free audit delivers the paid website. The tooling that hooks the lead is the tooling that serves the client.
+Every stage is powered by Foxhue Studio commands. The same system that delivers the free audit delivers the paid website. The tooling that hooks the lead is the tooling that serves the client.
 
 ---
 

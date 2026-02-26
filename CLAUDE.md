@@ -1,9 +1,9 @@
-# Foxhue SuperClaude — Agency Project Template
+# Foxhue Studio — Agency Project Template
 
 ## Overview
 Reusable project template for Foxhue client website builds. New client projects are created using GitHub's "Use this template" feature, then configured via `project.json` and scaffolded with `/scaffold`.
 
-**GitHub**: https://github.com/ajeibbotson-cmyk/foxhue-superclaude
+**GitHub**: https://github.com/ajeibbotson-cmyk/foxhue-studio
 **Usage**: Template repo → "Use this template" → configure `project.json` → run `/scaffold`
 
 ## Project Lifecycle
@@ -27,7 +27,7 @@ See `docs/workflow-guide.md` for the full 5-phase workflow with timelines.
 
 ## Repo Structure
 ```
-foxhue-superclaude/
+foxhue-studio/
 ├── project.json              ← client config (all generated files read from this)
 ├── CLAUDE.md                 ← this file (updated by /scaffold)
 ├── .gitignore

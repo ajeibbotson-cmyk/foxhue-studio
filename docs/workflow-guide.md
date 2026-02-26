@@ -1,13 +1,13 @@
 # Foxhue Project Workflow Guide
 
-Step-by-step process for delivering a new client website project using the Foxhue SuperClaude template.
+Step-by-step process for delivering a new client website project using the Foxhue Studio template.
 
 ---
 
 ## Phase 1: Setup (Day 1)
 
 ### 1.1 Create the project repo
-- Go to [foxhue-superclaude](https://github.com/ajeibbotson-cmyk/foxhue-superclaude) on GitHub
+- Go to [foxhue-studio](https://github.com/ajeibbotson-cmyk/foxhue-studio) on GitHub
 - Click **"Use this template"** → **"Create a new repository"**
 - Name it `{client-slug}` (e.g., `marr-laser`)
 - Set to **Public** (required for GitHub Pages)

@@ -1,4 +1,4 @@
-# Foxhue SuperClaude — Product Roadmap
+# Foxhue Studio — Product Roadmap
 
 *Internal strategy document for Andrew & Ashley*
 *Last updated: 20 February 2026*
@@ -7,7 +7,7 @@
 
 ## 1. What We've Built
 
-SuperClaude is a template-driven workflow that turns a single config file into a full set of client-facing deliverables. One repo per client, five commands, zero hardcoding.
+Foxhue Studio is a template-driven workflow that turns a single config file into a full set of client-facing deliverables. One repo per client, five commands, zero hardcoding.
 
 ### The Config: `project.json`
 
